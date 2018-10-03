@@ -150,7 +150,6 @@
             </Button>
             <StackPanel x:Name="spParallelSyncAsync" Grid.Row="2" Visibility="Collapsed">
                 <TextBlock x:Name="rParallelSyncAsync" Margin="10">
-                    More Detail
                 </TextBlock>
             </StackPanel>
         </Grid>
