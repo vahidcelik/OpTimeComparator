@@ -8,7 +8,8 @@ namespace AsyncDemo
 {
     public class ProgressReportModel
     {
-        public List<WebsiteDataModel> SitesDownloaded { get; set; } = new List<WebsiteDataModel>();
+        public List<DataModel> SitesDownloaded { get; set; } = new List<DataModel>();
         public int PercentageComplete { get; set; } = 0;
     }
 }
+ 

@@ -18,13 +18,141 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Margin="10 0" FontSize="28">
-           Simple Async Demo
+           Sync/Asycn efort test
         </TextBlock>
-        <Button x:Name="executeSync" Grid.Row="1" Margin="10" Padding="10" Content="Normal Execute" Click="executeSync_Click"/>
-        <Button x:Name="executeAsync" Grid.Row="2" Margin="10" Padding="10" Content="Async Execute" Click="executeAsync_Click" />
-        <ProgressBar x:Name="progressBar" Value="0" Grid.Row="2" Height="10" Margin="10" Padding="0" Opacity="0.5" VerticalAlignment="Bottom" ></ProgressBar>
-        <Button x:Name="executeParallelAsync" Grid.Row="4" Margin="10" Padding="10" Content="Parallel Async Execute" Click="executeParallelAsync_Click"/>
-        <Button x:Name="cancel" Grid.Row="5" Margin="10" Padding="10" Content="Cancel Operation" Click="cancel_Click"/>
-        <TextBlock x:Name="result" Grid.Row="6" Margin="10" />
+
+        <Grid Grid.Row="1" Margin="15">
+            <TextBlock Margin="10 0" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" >
+                Try Count >>
+            </TextBlock>
+            <Button Margin="175 0" Padding="5" Content="Start" Width="100" VerticalAlignment="Center" HorizontalAlignment="Left" Cursor="Hand"/>
+            <TextBox x:Name="executeCount" Margin="120 0"  Width="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" ></TextBox>
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="10 5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <ProgressBar x:Name="pbSync" Value="0" Grid.Row="2" Height="30" Opacity="0.5" VerticalAlignment="Center" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" FontWeight="Bold"> Sync Execution</TextBlock>
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10 0" Grid.Row="2"> %0</TextBlock>
+            </Grid>
+            <TextBlock Grid.Row="1" x:Name="resultSync"  >
+                Average Execution Time
+            </TextBlock>
+
+            <Button x:Name="btnSync" Grid.Row="1" HorizontalAlignment="Right" Margin="0 0"  BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Cursor="Hand"
+                    Click="btnSync_Click" >
+                More Detail
+            </Button>
+            <StackPanel x:Name="spSync" Grid.Row="2" Visibility="Collapsed">
+                <TextBlock x:Name="rSync" Margin="10">
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="3" Margin="10 5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <ProgressBar x:Name="pbParallelSync" Value="0" Grid.Row="2" Height="30"  Opacity="0.5" VerticalAlignment="Center" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" FontWeight="Bold"> Parallel Sync Execution</TextBlock>
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10 0" Grid.Row="2"> %0</TextBlock>
+            </Grid>
+            <TextBlock Grid.Row="1" x:Name="resultParallelSync"  >
+                Average Execution Time
+            </TextBlock>
+
+            <Button x:Name="btnParallelSync" Grid.Row="1" HorizontalAlignment="Right" Margin="0 0"  BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Cursor="Hand"
+                    Click="btnParallelSync_Click">
+                More Detail
+            </Button>
+            <StackPanel x:Name="spParallelSync" Grid.Row="2" Visibility="Collapsed">
+                <TextBlock x:Name="rParallelSync" Margin="10">
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="4" Margin="10 5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <ProgressBar x:Name="pbAsync" Value="0" Grid.Row="2" Height="30"  Opacity="0.5" VerticalAlignment="Center" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" FontWeight="Bold"> Async Execution</TextBlock>
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10 0" Grid.Row="2"> %0</TextBlock>
+            </Grid>
+            <TextBlock Grid.Row="1" x:Name="resultAsync"  >
+                Average Execution Time
+            </TextBlock>
+
+            <Button x:Name="btnAsync" Grid.Row="1" HorizontalAlignment="Right" Margin="0 0"  BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Cursor="Hand"
+                    Click="btnAsync_Click" >
+                More Detail
+            </Button>
+            <StackPanel x:Name="spAsync" Grid.Row="2" Visibility="Collapsed">
+                <TextBlock x:Name="rAsync" Margin="10">
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="5" Margin="10 5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <ProgressBar x:Name="pbParallelAsync" Value="0" Grid.Row="2" Height="30"  Opacity="0.5" VerticalAlignment="Center" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" FontWeight="Bold"> Parallel Async Execution</TextBlock>
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10 0" Grid.Row="2"> %0</TextBlock>
+            </Grid>
+            <TextBlock Grid.Row="1" x:Name="resultParallelAsync"  >
+                Average Execution Time
+            </TextBlock>
+
+            <Button x:Name="btnParallelAsync" Grid.Row="1" HorizontalAlignment="Right" Margin="0 0"  BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Cursor="Hand"
+                    Click="btnParallelAsync_Click" >
+                More Detail
+            </Button>
+            <StackPanel x:Name="spParallelAsync" Grid.Row="2" Visibility="Collapsed">
+                <TextBlock x:Name="rParallelAsync" Margin="10">
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="6" Margin="10 5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <ProgressBar x:Name="pbParallelSyncAsync" Value="0" Grid.Row="2" Height="30"  Opacity="0.5" VerticalAlignment="Center" />
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" FontWeight="Bold"> Parallel Sync/Async Execution</TextBlock>
+                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10 0" Grid.Row="2"> %0</TextBlock>
+            </Grid>
+            <TextBlock Grid.Row="1" x:Name="resultParallelSyncAsync"  >
+                Average Execution Time
+            </TextBlock>
+
+            <Button x:Name="btnParallelSyncAsync" Grid.Row="1" HorizontalAlignment="Right" Margin="0 0"  BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Cursor="Hand"
+                    Click="btnParallelSyncAsync_Click" >
+                More Detail
+            </Button>
+            <StackPanel x:Name="spParallelSyncAsync" Grid.Row="2" Visibility="Collapsed">
+                <TextBlock x:Name="rParallelSyncAsync" Margin="10">
+                    More Detail
+                </TextBlock>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

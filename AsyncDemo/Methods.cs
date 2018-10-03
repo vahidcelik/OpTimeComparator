@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace AsyncDemo
 {
     public static class Methods
     {
-        public static List<WebsiteDataModel> RunSync()
+        public static List<DataModel> RunSync()
         {
             List<string> webSites = PrepData();
-            List<WebsiteDataModel> list = new List<WebsiteDataModel>();
+            List<DataModel> list = new List<DataModel>();
             foreach (var site in webSites)
             {
                 list.Add(DownloadWebsite(site));
@@ -22,10 +22,10 @@ namespace AsyncDemo
             return list;
         }
 
-        public static async Task<List<WebsiteDataModel>> RunAsync(IProgress<ProgressReportModel> progress, CancellationToken cancellationToken)
+        public static async Task<List<DataModel>> RunAsync(IProgress<ProgressReportModel> progress, CancellationToken cancellationToken)
         {
             List<string> webSites = PrepData();
-            List<WebsiteDataModel> list = new List<WebsiteDataModel>();
+            List<DataModel> list = new List<DataModel>();
             ProgressReportModel report = new ProgressReportModel();
 
             foreach (var site in webSites)
@@ -42,11 +42,11 @@ namespace AsyncDemo
             return list;
         }
 
-        public static async Task<List<WebsiteDataModel>> RunParalelAsync()
+        public static async Task<List<DataModel>> RunParallelAsync()
         {
             List<string> webSites = PrepData();
 
-            List<Task<WebsiteDataModel>> tasks = new List<Task<WebsiteDataModel>>();
+            List<Task<DataModel>> tasks = new List<Task<DataModel>>();
 
             foreach (var site in webSites)
             {
@@ -55,12 +55,12 @@ namespace AsyncDemo
 
             var response = await Task.WhenAll(tasks); // Call all task as parallel
 
-            return new List<WebsiteDataModel>(response);
+            return new List<DataModel>(response);
         }
-        public static List<WebsiteDataModel> RunParallelSync()
+        public static List<DataModel> RunParallelSync()
         {
             List<string> webSites = PrepData();
-            List<WebsiteDataModel> list = new List<WebsiteDataModel>();
+            List<DataModel> list = new List<DataModel>();
 
             Parallel.ForEach<string>(webSites, (site) =>
             {
@@ -70,10 +70,10 @@ namespace AsyncDemo
             return list;
         }
 
-        public static async Task<List<WebsiteDataModel>> RunParallelAyncWithForeach(IProgress<ProgressReportModel> progress)
+        public static async Task<List<DataModel>> RunParallelAyncWithForeach(IProgress<ProgressReportModel> progress)
         {
             List<string> webSites = PrepData();
-            List<WebsiteDataModel> list = new List<WebsiteDataModel>();
+            List<DataModel> list = new List<DataModel>();
             ProgressReportModel report = new ProgressReportModel();
 
             await Task.Run(() =>
@@ -90,9 +90,9 @@ namespace AsyncDemo
             return list;
         }
 
-        private static WebsiteDataModel DownloadWebsite(string site)
+        private static DataModel DownloadWebsite(string site)
         {
-            WebsiteDataModel output = new WebsiteDataModel()
+            DataModel output = new DataModel()
             {
                 WebsiteUrl = site
             };
@@ -103,9 +103,9 @@ namespace AsyncDemo
             return output;
         }
 
-        private static async Task<WebsiteDataModel> DownloadWebsiteAsync(string site)
+        private static async Task<DataModel> DownloadWebsiteAsync(string site)
         {
-            WebsiteDataModel output = new WebsiteDataModel()
+            DataModel output = new DataModel()
             {
                 WebsiteUrl = site
             };
@@ -130,6 +130,18 @@ namespace AsyncDemo
             return output;
         }
 
-
+        public static void HideShowDetail(Button b, StackPanel sp)
+        {
+            if (sp.Visibility == Visibility.Collapsed)
+            {
+                sp.Visibility = Visibility.Visible;
+                b.Content = "Hide Detail";
+            }
+            else
+            {
+                sp.Visibility = Visibility.Collapsed;
+                b.Content = "More Detail";
+            }
+        }
     }
 }
