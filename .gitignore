@@ -3,3 +3,5 @@
 ################################################################################
 
 /.vs/AsyncDemo/v15
+/AsyncDemo/bin/Debug
+/AsyncDemo/obj/Debug
