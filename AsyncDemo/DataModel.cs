@@ -10,5 +10,6 @@ namespace AsyncDemo
     {
         public string WebsiteUrl { get; set; } = string.Empty;
         public string WebsiteData { get; set; } = string.Empty;
+        public string WebsıteĞçşta { get; set; } = string.Empty;
     }
 }
